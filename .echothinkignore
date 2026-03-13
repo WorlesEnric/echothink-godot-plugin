@@ -1,0 +1,17 @@
+# Export keys
+*.keystore
+export_presets.cfg.secret
+
+# Local cache
+.godot/
+.import/
+
+# Large temp files
+*.tmp
+*.bak
+
+# Third-party closed-source assets
+addons/third_party_closed/
+
+# Personal experiments
+experiments/

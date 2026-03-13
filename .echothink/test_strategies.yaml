@@ -1,0 +1,14 @@
+strategies:
+  - id: gdscript_smoke
+    kind: headless
+    profile: safe
+    description: "Basic script and resource load check"
+  - id: gut_core
+    kind: framework
+    framework: GUT
+    profile: medium
+    description: "GUT test framework execution"
+  - id: scene_smoke
+    kind: headless
+    profile: safe
+    description: "Scene load and basic validation"

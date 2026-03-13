@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PatchProposal",
+  "type": "object",
+  "required": ["patch_id", "work_item_id", "operations"],
+  "properties": {
+    "patch_id": { "type": "string" },
+    "work_item_id": { "type": "string" },
+    "task_run_id": { "type": "string" },
+    "base": {
+      "type": "object",
+      "properties": {
+        "gitlab_project": { "type": "string" },
+        "branch": { "type": "string" },
+        "commit": { "type": "string" }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "path"],
+        "properties": {
+          "type": { "type": "string", "enum": ["text_patch", "scene_op", "resource_op", "asset_import", "project_setting_set", "test_run"] },
+          "path": { "type": "string" },
+          "patch": { "type": "string" },
+          "scene": { "type": "string" },
+          "actions": { "type": "array" },
+          "property": { "type": "string" },
+          "value": {}
+        }
+      }
+    },
+    "validation_plan": { "type": "array", "items": { "type": "string" } },
+    "publish_intent": { "type": "string", "enum": ["local_only", "gitlab_branch", "gitlab_mr"] },
+    "risk_summary": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}

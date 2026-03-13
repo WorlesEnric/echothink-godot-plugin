@@ -1,0 +1,13 @@
+workspace_id: ""
+project_name: ""
+godot:
+  engine_major: 4
+gitlab:
+  project: ""
+  default_branch: main
+outline:
+  primary_doc_id: ""
+  task_queue_doc_id: ""
+assets:
+  remote_prefix: ""
+policy_profile: studio-default

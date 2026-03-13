@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LogBundle",
+  "type": "object",
+  "required": ["bundle_id", "work_item_id", "task_run_id", "entries", "context", "created_at"],
+  "properties": {
+    "bundle_id": { "type": "string" },
+    "work_item_id": { "type": "string" },
+    "task_run_id": { "type": "string" },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "source", "level", "message"],
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "source": { "type": "string", "enum": ["editor", "runtime", "import", "test", "plugin", "bridge"] },
+          "level": { "type": "string", "enum": ["debug", "info", "warning", "error", "critical"] },
+          "file_context": { "type": "string" },
+          "scene_context": { "type": "string" },
+          "node_context": { "type": "string" },
+          "message": { "type": "string" },
+          "stack_trace": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "project_dir": { "type": "string" },
+        "current_scene_path": { "type": "string" },
+        "platform": { "type": "string" },
+        "godot_version": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

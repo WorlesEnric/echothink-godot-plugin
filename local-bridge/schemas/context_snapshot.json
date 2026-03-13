@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProjectContextSnapshot",
+  "type": "object",
+  "required": [
+    "snapshot_id",
+    "timestamp",
+    "current_scene_path",
+    "open_scripts",
+    "modified_files",
+    "selected_nodes",
+    "current_branch",
+    "head_commit",
+    "editor_errors",
+    "godot_version",
+    "platform"
+  ],
+  "properties": {
+    "snapshot_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "current_scene_path": { "type": "string" },
+    "open_scripts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "modified_files": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "selected_nodes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "current_branch": { "type": "string" },
+    "head_commit": { "type": "string" },
+    "editor_errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "message"],
+        "properties": {
+          "severity": { "type": "string", "enum": ["info", "warning", "error"] },
+          "message": { "type": "string" },
+          "file": { "type": "string" },
+          "line": { "type": "integer", "minimum": 1 },
+          "column": { "type": "integer", "minimum": 1 },
+          "code": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "godot_version": { "type": "string" },
+    "platform": { "type": "string" }
+  },
+  "additionalProperties": false
+}

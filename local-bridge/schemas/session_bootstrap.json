@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SessionBootstrap",
+  "oneOf": [
+    { "$ref": "#/$defs/SessionBootstrapRequest" },
+    { "$ref": "#/$defs/SessionBootstrapResponse" }
+  ],
+  "$defs": {
+    "SessionBootstrapRequest": {
+      "title": "SessionBootstrapRequest",
+      "type": "object",
+      "required": ["workspace_id", "project_dir", "nonce"],
+      "properties": {
+        "workspace_id": { "type": "string" },
+        "project_dir": { "type": "string" },
+        "nonce": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "SessionBootstrapResponse": {
+      "title": "SessionBootstrapResponse",
+      "type": "object",
+      "required": ["session_id", "nonce", "capabilities", "workspace_config"],
+      "properties": {
+        "session_id": { "type": "string" },
+        "nonce": { "type": "string" },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "workspace_config": { "$ref": "#/$defs/WorkspaceConfig" }
+      },
+      "additionalProperties": false
+    },
+    "WorkspaceConfig": {
+      "type": "object",
+      "properties": {
+        "workspace_id": { "type": "string" },
+        "project_name": { "type": "string" },
+        "project_dir": { "type": "string" },
+        "policy_profile": { "type": "string" },
+        "gitlab_project": { "type": "string" },
+        "default_branch": { "type": "string" },
+        "asset_remote_prefix": { "type": "string" },
+        "outline_doc_id": { "type": "string" },
+        "task_queue_doc_id": { "type": "string" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

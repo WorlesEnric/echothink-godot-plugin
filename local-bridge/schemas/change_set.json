@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChangeSet",
+  "type": "object",
+  "required": ["changeset_id", "work_item_id", "task_run_id", "timestamp", "operations", "status"],
+  "properties": {
+    "changeset_id": { "type": "string" },
+    "work_item_id": { "type": "string" },
+    "task_run_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "path", "description", "reversible"],
+        "properties": {
+          "type": { "type": "string" },
+          "path": { "type": "string" },
+          "description": { "type": "string" },
+          "reversible": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "preimages": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/FileImage" }
+    },
+    "postimages": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/FileImage" }
+    },
+    "status": { "type": "string", "enum": ["pending", "applied", "rolled_back", "failed"] },
+    "error_message": { "type": "string" }
+  },
+  "$defs": {
+    "FileImage": {
+      "type": "object",
+      "required": ["exists"],
+      "properties": {
+        "exists": { "type": "boolean" },
+        "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "content": { "type": "string" },
+        "captured_at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": { "const": "failed" }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "required": ["error_message"]
+      }
+    }
+  ],
+  "additionalProperties": false
+}

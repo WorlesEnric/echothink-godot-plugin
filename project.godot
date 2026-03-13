@@ -1,0 +1,15 @@
+; Godot Engine project file
+; WARNING: Do not edit manually.
+
+[gd_resource type="Environment" load_steps=2 format=3]
+
+config_version=5
+
+[application]
+
+config/name="EchoThink Plugin Demo"
+config/features=PackedStringArray("4.3")
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/echothink/plugin.cfg")
